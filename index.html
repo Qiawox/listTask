@@ -5,18 +5,64 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
-  <script src="main.js" defer></script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
   <title>Document</title>
 </head>
 <body>
   <h1>Task List</h1>
   <div class="add_task">
-    <input type="text">
-    <button type="button">ADD TASK</button><br>
-    <button type="button">REMOVE ALL</button><button type="button">READY ALL</button>
+    <label for="">Задача</label>
+    <div class="our_form">
+      <input type="text" class="text_around" placeholder="Enter text..." id="text_around">
+      <button type="button" class="add">Add Task</button>
+    </div><br>
+    <div>
+      <button type="button" class="remove_all">Remove all</button><button type="button" class="ready_all">Ready all</button>
+    </div>
   </div>
-  <div class="container">
-
-  </div>
+  <div class="container" id="container"></div>
+  <script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+  <script>
+    $("button.add").on('click', function(){
+      const cont = document.getElementById("container");
+      const text = document.getElementById("text_around");
+      if (text.value == '') {
+        alert('Невозможно добавить пустую задачу!');
+      }
+      else
+      {
+        const status = document.createElement("div");
+        status.className = "blockA";
+        status.innerHTML = "<div class='status' id='status'></div>"
+        const div = document.createElement("div");
+        div.className = "blockC";
+        div.innerHTML = text.value;
+        const sub = document.createElement("div");
+        sub.className = "blockB";
+        sub.innerHTML = "<button type='button' class='ready_b'>Ready</button> <button type='button' class='delete_b'>Delete</button>";
+        const varDiv = document.createElement("div");
+        varDiv.className = "block";
+        varDiv.appendChild(div);
+        varDiv.appendChild(sub);
+        varDiv.appendChild(status);
+        cont.appendChild(varDiv);
+      }
+      
+    })
+  </script>
+  <script>
+  $("button.ready_b").on('click', function(){
+      document.getElementById('status').style.background = "#000000";
+    })
+  </script>
+    
+  
 </body>
 </html>
